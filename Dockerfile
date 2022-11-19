@@ -21,9 +21,7 @@ COPY --from=pruner /app/ .
 COPY --from=dev-deps /app/node_modules/ ./node_modules/
 RUN npm run build
 
-FROM node:16-slim@sha256:e41a70d089deb43717a834c5c966842dab760e56257bfe391f3f161ce5b28c52 AS release
-WORKDIR /home/node
-
+FROM node:16-slim@sha256:e41a70d089deb43717a834c5c966842dab760e56257bfe391f3f161ce5b28c52 AS packaged
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 RUN apt-get update && apt-get install curl gnupg -y \
   && curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -32,6 +30,8 @@ RUN apt-get update && apt-get install curl gnupg -y \
   && apt-get install google-chrome-stable -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
+FROM packaged AS release
+WORKDIR /home/node
 
 COPY --chown=node:node --from=builder /app/dist ./
 COPY --chown=node:node --from=prod-deps /app/prod-deps/node_modules ./node_modules
