@@ -1,0 +1,9 @@
+node_modules
+yarn-error.log
+.DS_Store
+dist/
+build
+.build
+.webpack
+.webpackCache
+app/generation/generated.ts
