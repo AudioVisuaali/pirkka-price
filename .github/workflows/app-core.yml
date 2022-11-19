@@ -36,9 +36,7 @@ jobs:
       run: npm run build
 
     - name: Typecheck
-      working-directory: ./apps/core
       run: npm run typescript-check
     
     - name: Lint
-      working-directory: ./apps/core
       run: npm run lint
