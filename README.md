@@ -1,4 +1,4 @@
-# Prikka price in docker caontainer
+# Prikka price docker image
 
 
 ## Develop
