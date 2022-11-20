@@ -1,4 +1,4 @@
-# Prikka price docker image
+# Prikka price in docker image
 
 
 ## Develop
